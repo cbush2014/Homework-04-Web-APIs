@@ -1,5 +1,5 @@
 var timeEl = document.getElementById("timer");
-var secondsLeft = 224;
+var secondsLeft = 4;
 
 function setTime() {
   var timerInterval = setInterval(function() {
@@ -7,8 +7,8 @@ function setTime() {
     timeEl.textContent = "Time: "+ secondsLeft;
 
     if(secondsLeft === 0) {
+      console.log("--- time has run out! --- clear timer")
       clearInterval(timerInterval);
-      takeQuiz();
     }
 
   }, 1000);
@@ -17,33 +17,42 @@ function setTime() {
 function takeQuiz() {
 //   timeEl.textContent = "Time: 0"+ ;
 
-  console.log( "invoke takeQuiz function");
   //  start timer 
   setTime();
 
 }
+ 
+function toggleSection(){
+
+  var startEl= document.getElementById("startQuiz");
+  var takeEl = document.getElementById("takeQuiz");
+
+  console.log(startEl);
+  if ( startEl.style.display === "none") {
+        startEl.style.display = "block";
+        takeEl.style.display= "none";
+  } else {
+        startEl.style.display = "none";
+        takeEl.style.display= "block";
+  }
+}
 
 
-document.querySelector("#startBtn").onclick = function () {
+document.querySelector("#startBtn").onclick = function (event) {
 
   // user clicks the Start Quiz button
   // hide the startQuiz section and show the takeQuiz section
 
+  console.log('Start butto fired');
 
-  if (event !== null) {
-        console.log('Start butto fired');
-    }
+  if(event === null){
+    return;
+  }
+    console.log( "invoke takeQuiz function");
 
-    var startEl= document.getElementById("startQuiz");
-    console.log(startEl);
-    startEl.style.display = "none";
-
-    var takeEl = document.getElementById("takeQuiz");
-    takeEl.style.display= "block"
+    toggleSection();
 
     takeQuiz();
-
-
-
-
 }
+
+
