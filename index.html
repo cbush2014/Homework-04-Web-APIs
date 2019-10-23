@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
 
 <head>
@@ -21,27 +22,68 @@
 <body style="background-color: rgba(209, 193, 83,0.5);">;
 
     <div class="container">
+
+
         <div class="row">
             <div class="col-sm-3 text-left d-flex justify-content-start">
-                <h3 id="highscores"><a href="#" class="" style= "text-decoration: none;">View Highscores</a></h3>
+                <h3 id="highscores"><a href="#" class="" style="text-decoration: none;">View Highscores</a></h3>
             </div>
             <div class="col-sm-9 text-right d-flex justify-content-start float-right">
                 <h3 id="timer">Time: 0</h3>
             </div>
         </div>
-        <div class="row">
-            <br>
-            <div class="col-6 text-center">
+        <section id="startQuiz">
+
+            <div class="row">
+                <br>
+                <div class="col-6 text-center">
                     <h1>Coding Quiz Challenge</h1>
-                    <p>Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by fifteen seconds!                   
-                    </p>        
+                    <p class="text-justify">Try to answer the following code-related questions within the time limit. Keep in mind that
+                        incorrect answers will penalize your score/time by fifteen seconds!
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-6 text-center">
-                    <button type="button" class="btn btn-primary rounded-pill id="startBtn">Start Quiz</button>
-            </div>          
-        </div>
+            <div class="row">
+                <div class="col-6 text-center">
+                    <button type="button" class="btn btn-primary rounded-pill" id="startBtn">Start Quiz</button>
+                </div>
+            </div>
+        </section>
+        <section id="takeQuiz" style="display: none;">
+            <div class="row m-5">
+                <div class="col" id="Question">
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" id="btnA1">Answer 11111111</button>
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" id="btnA2">Answer 22222</button>
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" id="btnA3">Answer
+                        3333333333333</button>
+                </div>
+            </div>
+
+            <div class="row p-1">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary" id="btnA4">Answer 4444444</button>
+                </div>
+            </div>
+            <div class="row p-1">
+                <div class="col-6" id="result">
+                    <h3>Correct</h3>
+                </div>
+            </div>
+        </section>
     </div>
 
     <!-- Optional JavaScript -->

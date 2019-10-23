@@ -1,5 +1,5 @@
 var timeEl = document.getElementById("timer");
-var secondsLeft = 4;
+var secondsLeft = 224;
 
 function setTime() {
   var timerInterval = setInterval(function() {
@@ -17,15 +17,33 @@ function setTime() {
 function takeQuiz() {
 //   timeEl.textContent = "Time: 0"+ ;
 
-alert("scooby do something here");
+  console.log( "invoke takeQuiz function");
+  //  start timer 
+  setTime();
 
 }
 
-setTime();
+
+document.querySelector("#startBtn").onclick = function () {
+
+  // user clicks the Start Quiz button
+  // hide the startQuiz section and show the takeQuiz section
 
 
-document.querySelector("#startBtn").onclick = function (event) {
-    if (event !== null) {
-        alert('Start Your Quiz NOW');
+  if (event !== null) {
+        console.log('Start butto fired');
     }
+
+    var startEl= document.getElementById("startQuiz");
+    console.log(startEl);
+    startEl.style.display = "none";
+
+    var takeEl = document.getElementById("takeQuiz");
+    takeEl.style.display= "block"
+
+    takeQuiz();
+
+
+
+
 }
