@@ -1,5 +1,5 @@
 var timeEl = document.getElementById("timer");
-var secondsLeft = 4;
+var secondsLeft = 3;
 
 function setTime() {
   var timerInterval = setInterval(function() {
@@ -9,6 +9,8 @@ function setTime() {
     if(secondsLeft === 0) {
       console.log("--- time has run out! --- clear timer")
       clearInterval(timerInterval);
+
+      toggleSection();
     }
 
   }, 1000);
@@ -43,7 +45,7 @@ document.querySelector("#startBtn").onclick = function (event) {
   // user clicks the Start Quiz button
   // hide the startQuiz section and show the takeQuiz section
 
-  console.log('Start butto fired');
+  console.log('Start button fired');
 
   if(event === null){
     return;
