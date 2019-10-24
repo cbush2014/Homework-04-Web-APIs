@@ -11,6 +11,8 @@ var sScore = document.getElementById("finalScore");
 var sMain = document.getElementById("startQuiz");
 var msgEl = document.getElementById("result");
 
+var numCorrectAnswers = 0;
+var numTotalQuestions= 0;
 var idxQuestion = 0;  // first question starts at 0
 var blnCorrect = false;
 
@@ -27,6 +29,7 @@ sTakeQ.addEventListener("click", function (event) {
     if (element.getAttribute("data-answered") === "Correct") {
       blnCorrect = true;
       msgEl.style.color = "green";
+      numCorrectAnswers++;
     } else {
       // incorrect answer, penalize them 15 second
       secondsLeft -= 15;
@@ -55,6 +58,7 @@ function loadQuestion() {
       idxCorrect = i;
     }
   }
+  numTotalQuestions++;
 
   c1El.textContent = questions[idxQuestion].choices[0];
   c2El.textContent = questions[idxQuestion].choices[1];
@@ -98,6 +102,8 @@ function setTime() {
     if (secondsLeft === 0) {
       console.log("--- time has run out! --- clear timer")
       clearInterval(timerInterval);
+      sTakeQ.classList.add("d-none")
+      sMain.classList.add("d-none");  
       showFinalScore();
     }
   }, 1000);
@@ -105,8 +111,9 @@ function setTime() {
 
 function showFinalScore(){
     // hide the main section and the quiz section
-    sTakeQ.classList.add("d-none")
-    sMain.classList.add("d-none");
+    // 
+    //store quiz score in local Storage
+
     sScore.classList.remove("d-none");
 }
 
@@ -115,27 +122,13 @@ function takeQuiz() {
   //populate 1st quiz question
   idxQuestion = 0;
   loadQuestion();
-  toggleSection();
-
+  // hide the main section
+  sMain.classList.add("d-none");  
+  // un-hide the quiz section
+  sTakeQ.classList.remove("d-none");
+ 
   //  start timer 
   setTime();
-
-}
-
-function toggleSection() {
-
-  var startEl = document.getElementById("startQuiz");
-  var takeEl = document.getElementById("takeQuiz");
-
-  console.log(startEl);
-  if (startEl.style.display === "none") {
-    startEl.style.display = "block";
-    takeEl.style.display = "none";
-  } else {
-    startEl.style.display = "none";
-    takeEl.style.display = "block";
-  }
-}
 
 
 document.querySelector("#startBtn").onclick = function (event) {
