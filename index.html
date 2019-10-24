@@ -36,7 +36,7 @@
                 <br>
                 <div class="col-12 text-center">
                     <h1>Coding Quiz Challenge</h1>
-                    <p class="text-justify">Try to answer the following code-related questions within the time limit. Keep in mind that
+                    <p id="qTitle" class="text-justify">Try to answer the following code-related questions within the time limit. Keep in mind that
                         incorrect answers will penalize your score/time by fifteen seconds!
                     </p>
                 </div>
@@ -54,31 +54,31 @@
             </div>
             <div class="row p-1">
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary" id="btnA1">Answer 11111111</button>
+                    <button type="button" class="btn btn-primary btn-block text-left" id="btnA1"></button>
                 </div>
             </div>
 
             <div class="row p-1">
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary" id="btnA2">Answer 22222</button>
+                    <button type="button" class="btn btn-primary btn-block text-left" id="btnA2"></button>
                 </div>
             </div>
 
             <div class="row p-1">
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary" id="btnA3">Answer
-                        3333333333333</button>
+                    <button type="button" class="btn btn-primary btn-block text-left" id="btnA3"></button>
                 </div>
             </div>
 
             <div class="row p-1">
                 <div class="col-6">
-                    <button type="button" class="btn btn-primary" id="btnA4">Answer 4444444</button>
+                    <button type="button" class="btn btn-primary btn-block text-left" id="btnA4"></button>
                 </div>
             </div>
             <div class="row p-1">
                 <div class="col-6" id="result">
                     <h3>Correct</h3>
+                    <div class="d-none" id="qAnswer"></div>
                 </div>
             </div>
         </section>
@@ -97,6 +97,7 @@
         crossorigin="anonymous"></script>
 
     <!-- Link our custom JavaScript -->
+    <script src="./questions.js"></script>
     <script src="./script.js"></script>
 
 </body>
