@@ -10,6 +10,7 @@ var sTakeQ = document.getElementById("takeQuiz");
 var sScore = document.getElementById("finalScore");
 var sMain = document.getElementById("startQuiz");
 var msgEl = document.getElementById("result");
+var msgDone = document.getElementById("msgQuizDone");
 
 var idxQuestion = 0;  // first question starts at 0
 var blnCorrect = false;
@@ -30,6 +31,8 @@ sTakeQ.addEventListener("click", function (event) {
     } else {
       // incorrect answer, penalize them 15 second
       secondsLeft -= 15;
+      checkTimeRemaining();
+
     }
     // alert("loading next question idxQuestion is"+idxQuestion);
     // load the next question
@@ -94,20 +97,27 @@ function setTime() {
     }
     // timeEl.textContent = "Time: "+ secondsLeft;
     timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
+    checkTimeRemaining();
 
-    if (secondsLeft === 0) {
-      console.log("--- time has run out! --- clear timer")
-      clearInterval(timerInterval);
-      showFinalScore();
-    }
   }, 1000);
+}
+
+function checkTimeRemaining(){
+    console.log("you have "+ secondsLeft +" on the timer");
+  if (secondsLeft <= 0) {
+    // console.log("--- time has run out! --- clear timer")
+    clearInterval(timerInterval);
+    showFinalScore();
+  }
 }
 
 function showFinalScore(){
     // hide the main section and the quiz section
-    sTakeQ.classList.add("d-none")
-    sMain.classList.add("d-none");
-    sScore.classList.remove("d-none");
+    msgDone.element.textContent = "All done!";
+    alert("showFinalScore");
+     sTakeQ.classList.add("d-none")
+    // sMain.classList.add("d-none");
+     sScore.classList.remove("d-none");
 }
 
 function takeQuiz() {
@@ -115,26 +125,13 @@ function takeQuiz() {
   //populate 1st quiz question
   idxQuestion = 0;
   loadQuestion();
-  toggleSection();
+  // hide the main section
+  sMain.classList.add("d-none");
+  sTakeQ.classList.remove("d-none");
 
   //  start timer 
   setTime();
 
-}
-
-function toggleSection() {
-
-  var startEl = document.getElementById("startQuiz");
-  var takeEl = document.getElementById("takeQuiz");
-
-  console.log(startEl);
-  if (startEl.style.display === "none") {
-    startEl.style.display = "block";
-    takeEl.style.display = "none";
-  } else {
-    startEl.style.display = "none";
-    takeEl.style.display = "block";
-  }
 }
 
 
