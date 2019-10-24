@@ -18,17 +18,22 @@ sTakeQ.addEventListener("click", function (event) {
   var element = event.target;
   if (element.matches("button")) {
     //which button did they click
-    console.log("button clicked: " +element.id);
+    console.log("button clicked: " + element.id);
     // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
 
     msgEl.textContent = element.getAttribute("data-answered");
     msgEl.style.color = "red";
 
-    if (element.getAttribute("data-answered") === "Correct"){
+    if (element.getAttribute("data-answered") === "Correct") {
       blnCorrect = true;
       msgEl.style.color = "green";
+    } else {
+      // incorrect answer, penalize them 15 second
+      secondsLeft -= 15;
     }
+    // alert("loading next question idxQuestion is"+idxQuestion);
     // load the next question
+    idxQuestion++;
     loadQuestion();
   }
 
@@ -36,6 +41,9 @@ sTakeQ.addEventListener("click", function (event) {
 
 function loadQuestion() {
   var idxCorrect = -99;
+  if (questions[idxQuestion] === undefined) {
+    return;
+  }
   var correctAnswer = questions[idxQuestion].answer;
 
   //we have a global questions array already in memory, and the current index
@@ -80,27 +88,33 @@ function loadQuestion() {
 function setTime() {
   var timerInterval = setInterval(function () {
     secondsLeft--;
+
+    if (secondsLeft < 0) {
+      secondsLeft === 0;
+    }
     // timeEl.textContent = "Time: "+ secondsLeft;
     timeEl.textContent = "Time: " + secondsLeft.toString().padStart(2, '0');
 
     if (secondsLeft === 0) {
       console.log("--- time has run out! --- clear timer")
       clearInterval(timerInterval);
-      toggleSection();
+      showFinalScore();
     }
-
-    // This section of code is for taking the quiz
-    loadQuestion();
-    idxQuestion++;
-
   }, 1000);
 }
 
+function showFinalScore(){
+    // hide the main section and the quiz section
+    sTakeQ.classList.add("d-none")
+    sMain.classList.add("d-none");
+    sScore.classList.remove("d-none");
+}
 
 function takeQuiz() {
 
   //populate 1st quiz question
-  loadQuestion(0);
+  idxQuestion = 0;
+  loadQuestion();
   toggleSection();
 
   //  start timer 
