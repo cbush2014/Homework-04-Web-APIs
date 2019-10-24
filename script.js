@@ -1,28 +1,78 @@
 var timeEl = document.getElementById("timer");
-var secondsLeft = 75;
+var secondsLeft = 70;
 
-var qTitle = document.getElementById("qTitle");
+var qTitle = document.getElementById("Question");
 var c1El = document.getElementById("btnA1");
 var c2El = document.getElementById("btnA2");
 var c3El = document.getElementById("btnA3");
 var c4El = document.getElementById("btnA4");
-var ansEl = document.getElementById("qAnswer");
+var sTakeQ = document.getElementById("takeQuiz");
+var sScore = document.getElementById("finalScore");
+var sMain = document.getElementById("startQuiz");
+var msgEl = document.getElementById("result");
 
-function loadQuestion(idx) {
+var idxQuestion = 0;  // first question starts at 0
+var blnCorrect = false;
 
-  var title = questions[idx].title;
-  var choice1 = questions[idx].choices[0];
-  var choice2 = questions[idx].choices[1];
-  var choice3 = questions[idx].choices[2];
-  var choice4 = questions[idx].choices[3];
-  var answer = questions[idx].answer;
+sTakeQ.addEventListener("click", function (event) {
+  var element = event.target;
+  if (element.matches("button")) {
+    //which button did they click
+    console.log("button clicked: " +element.id);
+    // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
 
-  qTitle.textContent = title;
-  c1El.textContent = choice1;
-  c2El.textContent = choice2;
-  c3El.textContent = choice3;
-  c4El.textContent = choice4;
-  qAnswer.textContent = answer;
+    msgEl.textContent = element.getAttribute("data-answered");
+    msgEl.style.color = "red";
+
+    if (element.getAttribute("data-answered") === "Correct"){
+      blnCorrect = true;
+      msgEl.style.color = "green";
+    }
+    // load the next question
+    loadQuestion();
+  }
+
+});
+
+function loadQuestion() {
+  var idxCorrect = -99;
+  var correctAnswer = questions[idxQuestion].answer;
+
+  //we have a global questions array already in memory, and the current index
+  qTitle.textContent = questions[idxQuestion].title;
+
+  // find out which choice is the correct one
+  for (i = 0; i < questions[idxQuestion].choices.length; i++) {
+    if (questions[idxQuestion].choices[i] === correctAnswer) {
+      idxCorrect = i;
+    }
+  }
+
+  c1El.textContent = questions[idxQuestion].choices[0];
+  c2El.textContent = questions[idxQuestion].choices[1];
+  c3El.textContent = questions[idxQuestion].choices[2];
+  c4El.textContent = questions[idxQuestion].choices[3];
+
+  c1El.setAttribute("data-answered", "Incorrect");
+  c2El.setAttribute("data-answered", "Incorrect");
+  c3El.setAttribute("data-answered", "Incorrect");
+  c4El.setAttribute("data-answered", "Incorrect");
+
+  switch (idxCorrect) {
+    case 0:
+      c1El.setAttribute("data-answered", "Correct");
+      break;
+    case 1:
+      c2El.setAttribute("data-answered", "Correct");
+      break;
+    case 2:
+      c3El.setAttribute("data-answered", "Correct");
+      break;
+    case 3:
+      c4El.setAttribute("data-answered", "Correct");
+      break;
+
+  }
 
 }
 
@@ -40,8 +90,8 @@ function setTime() {
     }
 
     // This section of code is for taking the quiz
-
-
+    loadQuestion();
+    idxQuestion++;
 
   }, 1000);
 }
