@@ -10,6 +10,7 @@ var sTakeQ = document.getElementById("takeQuiz");
 var sScore = document.getElementById("finalScore");
 var sMain = document.getElementById("startQuiz");
 var msgEl = document.getElementById("result");
+var HighScoreEl = document.getElementById("idHighscore");
 
 var numCorrectAnswers = 0;
 var numTotalQuestions= 0;
@@ -129,7 +130,7 @@ function takeQuiz() {
  
   //  start timer 
   setTime();
-
+}
 
 document.querySelector("#startBtn").onclick = function (event) {
 
@@ -144,5 +145,4 @@ document.querySelector("#startBtn").onclick = function (event) {
 
   takeQuiz();
 }
-
 
