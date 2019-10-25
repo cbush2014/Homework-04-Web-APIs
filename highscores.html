@@ -23,26 +23,26 @@
 
     <div class="container bg-white w-50">
 
-           <div class="row m-5">
-                <div class="col-4 text-center">
-                        <h1>Highscores</h1>
-                 </div>
-           </div>
-           <div class="row">
+        <div class="row m-5">
+            <div class="col-4 text-center">
+                <h1>Highscores</h1>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-6">
                 <ol class="bg-warning">
-                    <li>CRB - 100</li>
+                    <li id="idHighscore">CRB - 100</li>
                 </ol>
             </div>
 
-           </div>
-           <div class="row p-1">
-                <div class="col-6">
-                    <button type="button" class="btn btn-primary" id="btnBack">Go Back</button>
-                    <button type="button" class="btn btn-primary" id="btnClear">Clear Highscores</button>
-                </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-6">
+                <button type="button" class="btn btn-primary" id="btnBack">Go Back</button>
+                <button type="button" class="btn btn-primary" id="btnClear">Clear Highscores</button>
             </div>
-   </div>
+        </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -58,22 +58,55 @@
 
     <!-- Link our custom JavaScript -->
     <script>
-        
-        document.getElementById("btnBack").onclick = function(event) {
+
+        var ready = function (fn) {
+
+            // Sanity check
+            if (typeof fn !== 'function') return;
+
+            // If document is already loaded, run method
+            if (document.readyState === 'complete') {
+                return fn();
+            }
+
+            // Otherwise, wait until document is loaded
+            document.addEventListener('DOMContentLoaded', fn, false);
+        };
+
+        // Example
+        ready(function () {
+
+
+            // Do stuff...
+            var HighScore = "";
+            var scoreEl = document.getElementById("idHighscore");
+
+            // Retrieve High Score info from localstorage
+            if (localStorage.getItem("highscore") !== null) {
+                HighScore = localStorage.getItem("highscore");
+                alert(HighScore + "from local storage");
+            }
+            scoreEl.textContent = HighScore;
+
+        });
+
+
+        document.getElementById("btnBack").onclick = function (event) {
             // alert("link back to index.html here");
-            document.location.href= "index.html";
+            // document.location.href= "index.html";
+            localStorage.setItem("highscore", "FAB - 34");
+            scoreEl.textContent = "FAB - 34";
+
         }
-        
-        var Initials = "";
-        var HighScore = "";
 
-        // Retrieve High Score info from localstorage
-        localStorage.setItem("userInitials", "CRB");
-        localStorage.setItem( "highscore", 100);
-        alert("high scores");
-        localStorage.getItem("userInitials");
-        localStorage.getItem( "highscore");
+        document.getElementById("btnClear").onclick = function (event) {
+            // Clear local storage
+            // localStorage.removeItem("userInitials");
+            localStorage.removeItem("highscore");
+            localStorage.setItem("highscore", "GFG - 77");
+            scoreEl.textContent = "HHH - 64";
 
+        }
 
     </script>
     <script src="./script.js"></script>
