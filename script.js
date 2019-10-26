@@ -11,9 +11,7 @@ var sTakeQ = document.getElementById("takeQuiz");
 var sScore = document.getElementById("finalScore");
 var sMain = document.getElementById("startQuiz");
 var msgEl = document.getElementById("result");
-<<<<<<< HEAD
 var HighScoreEl = document.getElementById("idHighscore");
-=======
 var msgDone = document.getElementById("msgQuizDone");
 var msgScoreEl = document.getElementById("msgScore");
 >>>>>>> 6a4794ec2ddca0c40f5144c3e40e5ce165f80a3e
