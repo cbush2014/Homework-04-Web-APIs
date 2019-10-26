@@ -14,7 +14,6 @@ var msgEl = document.getElementById("result");
 var HighScoreEl = document.getElementById("idHighscore");
 var msgDone = document.getElementById("msgQuizDone");
 var msgScoreEl = document.getElementById("msgScore");
->>>>>>> 6a4794ec2ddca0c40f5144c3e40e5ce165f80a3e
 
 var numCorrectAnswers = 0;
 var numTotalQuestions= 0;
