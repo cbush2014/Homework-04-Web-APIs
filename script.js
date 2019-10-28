@@ -16,22 +16,22 @@ var msgDone = document.getElementById("msgQuizDone");
 var msgScoreEl = document.getElementById("msgScore");
 
 var numCorrectAnswers = 0;
-var numTotalQuestions= 0;
+var numTotalQuestions = 0;
 var idxQuestion = 0;  // first question starts at 0
 var blnCorrect = false;
-var numCorrectAnswers = 0;
-var numTotalQuestions = 0;
+var finalscore = 0;
+var blnFinalQuestion = false;
 
 sTakeQ.addEventListener("click", function (event) {
   var element = event.target;
   if (element.matches("button")) {
     //which button did they click
-    console.log("button clicked: " + element.id);
+    // console.log("button clicked: " + element.id);
     // alert("You clicked the "+element.getAttribute("data-answered")+" answer");
 
     msgEl.textContent = element.getAttribute("data-answered");
     msgEl.style.color = "red";
-    console.log(msgEl);
+    // console.log(msgEl);
     if (element.getAttribute("data-answered") === "Correct") {
       blnCorrect = true;
       msgEl.style.color = "green";
@@ -53,6 +53,10 @@ sTakeQ.addEventListener("click", function (event) {
 function loadQuestion() {
   var idxCorrect = -99;
   if (questions[idxQuestion] === undefined) {
+    // We have reached the end of file on our questions array
+    blnFinalQuestion = true;
+    //disable the buttons so they cannot keep scoring points!
+    disableQuiz();
     return;
   }
   var correctAnswer = questions[idxQuestion].answer;
@@ -67,7 +71,6 @@ function loadQuestion() {
       idxCorrect = i;
     }
   }
-  numTotalQuestions++;
 
   c1El.textContent = questions[idxQuestion].choices[0];
   c2El.textContent = questions[idxQuestion].choices[1];
@@ -114,14 +117,10 @@ function setTime() {
 
 function checkTimeRemaining() {
 
-  if (secondsLeft <= 0) {
-    // console.log("--- time has run out! --- clear timer")
-    setTimeout(function () {
-      document.getElementById("msgQuizDone").textContent = "Your Time is Up!";
-      document.getElementById("msgQuizDone").style.color = "red";
-    }, 1000);
-
+  if (secondsLeft <= 0 || blnFinalQuestion) {
+    disableQuiz();
     clearInterval(timerInterval);
+
     showFinalScore();
   }
 }
@@ -135,18 +134,22 @@ function showFinalScore() {
   if (!secondsLeft > 0) {
     secondsLeft = 0;
   }
-  alert(secondsLeft);
+
+  // var finalscore = 0;
+  // had scope issues, made global for now
+  finalscore = 0;
   if (numCorrectAnswers > 0) {
-    document.getElementById("msgScore").textContent = "Your final score is " + (numCorrectAnswers / numTotalQuestions) + (0.2 * secondsLeft);
-  } else {
-    document.getElementById("msgScore").textContent = "Your final score is 0";
+
+    finalscore = Math.round(100 * (numCorrectAnswers / numTotalQuestions) + (0.2 * secondsLeft));
   }
+  console.log("note: Total questions= " + numTotalQuestions + "\n correct answers= " + numCorrectAnswers + "\n seconds left= " + secondsLeft + "\n final score= " + finalscore);
+
+  document.getElementById("msgScore").textContent = "Your final score is " + finalscore;
 
   // document.getElementById("msgScore").textContent = "Your final score is "+ (idxCorrect/numTotalQuestions)+(0.2*secondsLeft);
   // completely bogus waste of hours, the 2 lines above this work, and the 2 commented lines below do Not work
   // msgDone.getElementById("msgQuizDone").textContent = "All done!";
   // msgScoreEl.getElementById("msgScore").textContent = "Your final score is "+ (idxCorrect/numTotalQuestions)+(0.2*secondsLeft);
-
 }
 
 function takeQuiz() {
@@ -163,13 +166,25 @@ function takeQuiz() {
 
 }
 
+function disableQuiz() {
+  c1El.disabled = true;
+  c1El.classList.remove("btn-primary");
+  c1El.classList.add("btn-secondary");
+  c2El.disabled = true;
+  c2El.classList.remove("btn-primary");
+  c2El.classList.add("btn-secondary");
+  c3El.disabled = true;
+  c3El.classList.remove("btn-primary");
+  c3El.classList.add("btn-secondary");
+  c4El.disabled = true;
+  c4El.classList.remove("btn-primary");
+  c4El.classList.add("btn-secondary");
+}
 
 document.querySelector("#startBtn").onclick = function (event) {
 
   // user clicks the Start Quiz button
   // hide the startQuiz section and show the takeQuiz section
-
-  console.log('Start button fired');
 
   if (event === null) {
     return;
@@ -177,4 +192,18 @@ document.querySelector("#startBtn").onclick = function (event) {
 
   takeQuiz();
 }
+
+
+
+document.querySelector("#submitBtn").onclick = function (event) {
+
+  if (event === null) {
+    return;
+  }
+  // store final score to localstorage
+  localStorage.setItem("highscore", document.getElementById("xInitials").textContent + finalscore);
+
+}
+
+
 

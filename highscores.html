@@ -19,7 +19,7 @@
 
 </head>
 
-<body class="bg-white">;
+<body class="bg-white">
 
     <div class="container bg-white w-50">
 
@@ -78,14 +78,15 @@
 
 
             // Do stuff...
-            var HighScore = "";
+            var HighScore = " ";
             var scoreEl = document.getElementById("idHighscore");
 
             // Retrieve High Score info from localstorage
             if (localStorage.getItem("highscore") !== null) {
                 HighScore = localStorage.getItem("highscore");
-                alert(HighScore + "from local storage");
+                // alert(HighScore + "from local storage");
             }
+            //display Highscore from localstorage on the screen element
             scoreEl.textContent = HighScore;
 
         });
@@ -93,18 +94,15 @@
 
         document.getElementById("btnBack").onclick = function (event) {
             // alert("link back to index.html here");
-            // document.location.href= "index.html";
-            localStorage.setItem("highscore", "FAB - 34");
-            scoreEl.textContent = "FAB - 34";
-
+            document.location.href= "index.html";
         }
 
         document.getElementById("btnClear").onclick = function (event) {
             // Clear local storage
             // localStorage.removeItem("userInitials");
             localStorage.removeItem("highscore");
-            localStorage.setItem("highscore", "GFG - 77");
-            scoreEl.textContent = "HHH - 64";
+            // clear out highscore displayed on screen
+            document.getElementById("idHighscore").textContent = " ";
 
         }
 
