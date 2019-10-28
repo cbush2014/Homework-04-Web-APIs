@@ -201,7 +201,15 @@ document.querySelector("#submitBtn").onclick = function (event) {
     return;
   }
   // store final score to localstorage
-  localStorage.setItem("highscore", document.getElementById("xInitials").textContent + finalscore);
+  // console.log(document.getElementById("xInitials").value);
+  var scooby = document.getElementById("xInitials").value;
+  console.log(scooby);
+  localStorage.setItem("initials", scooby);
+  localStorage.setItem("highscore",  finalscore);
+
+  document.getElementById("submitBtn").disabled = true;
+  document.getElementById("submitBtn").remove("btn-primary");
+  document.getElementById("submitBtn").add("btn-secondary");
 
 }
 

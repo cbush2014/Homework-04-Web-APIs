@@ -78,7 +78,7 @@
 
 
             // Do stuff...
-            var HighScore = " ";
+            var HighScore, Initials = " ";
             var scoreEl = document.getElementById("idHighscore");
 
             // Retrieve High Score info from localstorage
@@ -86,8 +86,12 @@
                 HighScore = localStorage.getItem("highscore");
                 // alert(HighScore + "from local storage");
             }
+            // Retrieve Initials from localstorage
+            if (localStorage.getItem("initials") !== null) {
+                Initials = localStorage.getItem("initials");
+            }
             //display Highscore from localstorage on the screen element
-            scoreEl.textContent = HighScore;
+            scoreEl.textContent = Initials +" "+ HighScore;
 
         });
 
