@@ -11,7 +11,6 @@ var sTakeQ = document.getElementById("takeQuiz");
 var sScore = document.getElementById("finalScore");
 var sMain = document.getElementById("startQuiz");
 var msgEl = document.getElementById("result");
-var HighScoreEl = document.getElementById("idHighscore");
 var msgDone = document.getElementById("msgQuizDone");
 var msgScoreEl = document.getElementById("msgScore");
 
@@ -141,6 +140,9 @@ function showFinalScore() {
   if (numCorrectAnswers > 0) {
 
     finalscore = Math.round(100 * (numCorrectAnswers / numTotalQuestions) + (0.2 * secondsLeft));
+    if (finalscore > 100) {
+      finalscore = 100;
+    }
   }
   console.log("note: Total questions= " + numTotalQuestions + "\n correct answers= " + numCorrectAnswers + "\n seconds left= " + secondsLeft + "\n final score= " + finalscore);
 
@@ -200,16 +202,41 @@ document.querySelector("#submitBtn").onclick = function (event) {
   if (event === null) {
     return;
   }
+  //Don't allow user to click submit if they haven't entered initials
+  if (document.getElementById("xInitials").value.length === 0) {
+    alert("Please enter your initials to submit your quiz score.");
+    return;
+  }
+  if (finalscore === 0) {
+    alert("Sorry, your score must be above a zero to be saved on the wall of fame.");
+    return;
+  }
   // store final score to localstorage
-  // console.log(document.getElementById("xInitials").value);
-  var scooby = document.getElementById("xInitials").value;
-  console.log(scooby);
-  localStorage.setItem("initials", scooby);
-  localStorage.setItem("highscore",  finalscore);
+  // first try to retrieve scores from local storage in case we've taken the quiz before
 
+  Scores = JSON.parse(localStorage.getItem('highscores'));
+
+  if (Scores !== null) {
+
+    Scores.push({
+      'initials': document.getElementById("xInitials").value,
+      'highscore': finalscore
+    });
+  } else {
+    // Converting to JSON string with JSON.stringify()
+    // then saving with localStorage
+    Scores = [];
+    Scores.push({
+      'initials': document.getElementById("xInitials").value,
+      'highscore': finalscore
+    });
+  }
+  localStorage.setItem('highscores', JSON.stringify(Scores));
   document.getElementById("submitBtn").disabled = true;
   document.getElementById("submitBtn").remove("btn-primary");
-  document.getElementById("submitBtn").add("btn-secondary");
+  // document.getElementById("submitBtn").add("btn-secondary");
+  sScore.classList.add("d-none");
+  document.location.href= "index.html";
 
 }
 

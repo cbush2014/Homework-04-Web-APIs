@@ -30,8 +30,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <ol>
-                    <li id="idHighscore"></li>
+                <ol id="scoreList" class="bg-white">
                 </ol>
             </div>
 
@@ -57,8 +56,8 @@
         crossorigin="anonymous"></script>
 
     <!-- Link our custom JavaScript -->
-    <script>
-
+    <script>       
+      
         var ready = function (fn) {
 
             // Sanity check
@@ -76,25 +75,42 @@
         // Example
         ready(function () {
 
-
             // Do stuff...
-            var HighScore, Initials = " ";
-            var scoreEl = document.getElementById("idHighscore");
+            // var highscore = { 'initials': "", 'highscore': 0 };
+            
 
+            // var HighScore = " ";
+            // var Initials = " ";
+            var scoreListEl = document.getElementById("scoreList");
             // Retrieve High Score info from localstorage
-            if (localStorage.getItem("highscore") !== null) {
-                HighScore = localStorage.getItem("highscore");
+            var Scores = JSON.parse(localStorage.getItem('highscores'));        
+
+            if (Scores !== null) {
+                
+                Scores.sort(function(a, b){
+                var x = a.highscore;
+                var y = b.highscore;
+                if (x > y) {return -1;}
+                if (x < y) {return 1;}
+                return 0;
+                });
+                console.log(Scores);
+
+                //clear out our ordered list items
+                var ol = document.getElementById("scoreList");
+                ol.innerHTML = "";
+                
                 // alert(HighScore + "from local storage");
+                //display Highscore from localstorage on the screen element
+                for (let i = 0; i < Scores.length; i++) {
+                    console.log(Scores[i].initials);
+               //     var dummy = Scores[i].initials +" "+ Scores[i].highscore;
+                    var scoreEl = document.createElement("li");
+                    scoreEl.textContent = Scores[i].initials +" "+ Scores[i].highscore;                        
+                    scoreListEl.appendChild(scoreEl);
+                }
             }
-            // Retrieve Initials from localstorage
-            if (localStorage.getItem("initials") !== null) {
-                Initials = localStorage.getItem("initials");
-            }
-            //display Highscore from localstorage on the screen element
-            scoreEl.textContent = Initials +" "+ HighScore;
-
         });
-
 
         document.getElementById("btnBack").onclick = function (event) {
             // alert("link back to index.html here");
@@ -103,16 +119,13 @@
 
         document.getElementById("btnClear").onclick = function (event) {
             // Clear local storage
-            // localStorage.removeItem("userInitials");
-            localStorage.removeItem("highscore");
-            // clear out highscore displayed on screen
-            document.getElementById("idHighscore").textContent = " ";
-
+            localStorage.removeItem("highscores");
+            //clear out our ordered list items
+            var ol = document.getElementById("scoreList");
+            ol.innerHTML = "";            
         }
 
     </script>
-    <script src="./script.js"></script>
-
 </body>
 
 </html>
