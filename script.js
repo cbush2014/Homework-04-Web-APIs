@@ -64,6 +64,12 @@ function loadQuestion() {
   //we have a global questions array already in memory, and the current index
   qTitle.textContent = questions[idxQuestion].title;
 
+  //add processing to shuffle the answer choices in case they took this quick before
+  questions[idxQuestion].choices.sort(function() {
+          return 0.5 - Math.random();
+        });
+
+
   // find out which choice is the correct one
   for (i = 0; i < questions[idxQuestion].choices.length; i++) {
     if (questions[idxQuestion].choices[i] === correctAnswer) {
