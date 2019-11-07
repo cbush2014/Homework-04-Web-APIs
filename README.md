@@ -1,11 +1,12 @@
 # Homework-04-Web-APIs
 A timer-based quiz application that stores high scores client-side
 
+![Bootcamp Homework 04 shield](https://img.shields.io/badge/Bootcamp-Homework_04_Code_Quiz-yellowgreen)
+
 ## Table of contents
 * [General info](#general-info)
+* [Instruction](#instructions)
 * [Screenshots](#screenshots)
-* [Technologies](#technologies)
-* [Setup](#setup)
 * [Features](#features)
 
 ## General info
@@ -14,25 +15,18 @@ In this homework assignment, your challenge is to build a code quiz with multipl
 
 Add more general information about project. What the purpose of the project is? Motivation?
 
+## Instructions
+As a coding bootcamp student
+I want to take a timed quiz on JavaScript fundamentals that stores high scores
+so that I can gauge my progress compared to my peers
+
 ## Screenshots
-![Example screenshot](.img/SS-main.jpg)
+![Example screenshot](./img/SS-main.jpg)
+![Example screenshot](./img/SS-startquiz.jpg)
+![Example screenshot](./img/SS-alldone.jpg)
 ![Example screenshot](./img/SS-highscores.jpg)
 ![Example screenshot](./img/SS-msg-score-zero.jpg)
 ![Example screenshot](./img/SS-msg-enter-initials.jpg)
-![Example screenshot](./img/screenshot.png)
-
-![Example screenshot](./img/screenshot.png)
-## Technologies
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
-
-## Setup
-Describe how to install / setup your local environement / add link to demo version.
-
-## Code Examples
-Show examples of usage:
-`put-your-code-here`
 
 ## Features
 List of features ready and TODOs for future development
@@ -43,6 +37,5 @@ List of features ready and TODOs for future development
 To-do list:
 * Create maintenance screen so user can add/edit quiz questions
 * Add audio clips to play on correct/incorrect answers
-
-## Status
-Project is: _in progress_, _finished_, _no longer continue_ and why?
+* Customize the application theme.
+* Create multiple quizzes and an option for users to choose between them.
