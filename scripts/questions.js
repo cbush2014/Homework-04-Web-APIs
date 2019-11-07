@@ -37,7 +37,7 @@ var questions = [
     {
       title: "Integer: Whole Number (-1,450) Float: Decimal Point (0.1, 12.454)",
       choices: ["What happens if you call the 'document.write' function after the document has fully loaded?", "What are the two types of Numbers within Datatypes?", "What are the two ways to add JS to your site?","What type of language is JavaScript?"],
-      answer: ""
+      answer: "What are the two types of Numbers within Datatypes?"
     },
     {
       title: "Representation of HTML Page...",
@@ -47,7 +47,7 @@ var questions = [
     {
       title: "Adds new elements to the beginning of an array, and returns the new length",
       choices: ["unshift()", "Operators", ".innerHTML", "Do While Loop"],
-      answer: ""
+      answer: "unshift()"
     },
     ///etc.
   ];

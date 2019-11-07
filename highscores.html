@@ -75,18 +75,12 @@
         // Example
         ready(function () {
 
-            // Do stuff...
-            // var highscore = { 'initials': "", 'highscore': 0 };
-            
-
-            // var HighScore = " ";
-            // var Initials = " ";
             var scoreListEl = document.getElementById("scoreList");
             // Retrieve High Score info from localstorage
             var Scores = JSON.parse(localStorage.getItem('highscores'));        
 
             if (Scores !== null) {
-                
+                // sort highscores in descending order
                 Scores.sort(function(a, b){
                 var x = a.highscore;
                 var y = b.highscore;
